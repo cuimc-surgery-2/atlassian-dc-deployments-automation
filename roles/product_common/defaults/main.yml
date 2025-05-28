@@ -1,0 +1,18 @@
+---
+java_major_version: "8"
+postgres_version: "9.6"
+
+# Disable these when using the product installer, otherwise we end up
+# fighting with it.
+atl_use_system_jdk: false
+atl_system_jdk_vendor: "temurin"
+
+# Ubuntu and Ansible use different architecture nomenclature; provide
+# an easy method for translating between them
+debian_architecture_translations:
+  x86_64: amd64
+  aarch64: arm64
+
+debian_architecture: "{{ debian_architecture_translations[ansible_architecture] | default(ansible_architecture) }}"
+# path to store jdk download
+atl_product_home_shared_download_dir: "{{ atl_shared_mountpoint }}/downloads"

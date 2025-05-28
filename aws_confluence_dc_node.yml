@@ -1,0 +1,35 @@
+---
+- name: aws_confluence_dc_node.yml
+  hosts: aws_node_local
+  become: true
+  module_defaults:
+    ansible.builtin.uri:
+      http_agent: "ansible-httpget_{{ ansible_play_name }}"
+    ansible.builtin.get_url:
+      http_agent: "ansible-httpget_{{ ansible_play_name }}"
+
+  vars:
+    # See group_vars/aws_node_local.yml, which pull vars from the environment.
+    atl_product_family: "confluence"
+    atl_product_user: "confluence"
+    atl_product_edition: "confluence"
+
+    atl_use_system_jdk: true
+    java_major_version: "11"
+    atl_download_format: "tarball"
+
+    atl_jdbc_encoding: 'UTF-8'
+    atl_jdbc_collation: 'en_US.UTF-8'
+
+  roles:
+    - role: linux_common
+    - role: aws_common
+    - role: aws_shared_fs_config
+    - role: product_common
+    - role: product_install
+      tags: [skip_on_stack_update]
+    - role: database_init
+      tags: [skip_on_stack_update]
+    - role: confluence_common
+    - role: confluence_config
+    - role: product_startup

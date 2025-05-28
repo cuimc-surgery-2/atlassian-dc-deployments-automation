@@ -1,0 +1,12 @@
+*~
+*.bak
+*.retry
+__pycache__
+*.pyc
+/.venv
+\#*\#
+.direnv
+.idea
+.vscode
+ansible_collections
+.DS_Store

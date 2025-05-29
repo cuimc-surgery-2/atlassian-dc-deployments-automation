@@ -6,6 +6,7 @@ atl_catalina_opts: ""
 atl_catalina_opts_extra: >-
   -XX:+UseG1GC
   -XX:+PrintAdaptiveSizePolicy
+  -XX:+PrintGCDetails
   -XX:+UseGCLogFileRotation
   -XX:+PrintTenuringDistribution
   -Dfile.encoding=UTF-8
